@@ -1,533 +1,293 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Bố Phúc</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Bố Phúc</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #061b4d, #14001f, #000000);
+}
 
-    body {
-      overflow: hidden;
-      background: linear-gradient(to bottom, #0b1026, #12001f 45%, #000000);
-      font-family: Arial, sans-serif;
-      width: 100vw;
-      height: 100vh;
-    }
+.scene {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
 
-    .scene {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to top, #166534, #15803d);
+}
 
-    .ground {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 120px;
-      background: linear-gradient(to top, #0d3b1e, #1f6b35);
-    }
+.boy {
+  position: absolute;
+  bottom: 120px;
+  left: -120px;
+  width: 90px;
+  height: 170px;
+  animation: walk 5s linear forwards;
+}
 
-    .boy {
-      position: absolute;
-      bottom: 120px;
-      left: -150px;
-      width: 100px;
-      height: 180px;
-      animation: walkIn 5s linear forwards;
-      animation-fill-mode: forwards;
-      z-index: 5;
-    }
+.head {
+  width: 50px;
+  height: 50px;
+  background: #ffd7b5;
+  border-radius: 50%;
+  margin: auto;
+}
 
-    .head {
-      width: 50px;
-      height: 50px;
-      background: #ffd6b0;
-      border-radius: 50%;
-      margin: auto;
-    }
+.body {
+  width: 60px;
+  height: 70px;
+  background: linear-gradient(to bottom, #60a5fa, #2563eb);
+  margin: auto;
+  border-radius: 12px;
+  position: relative;
+}
 
-    .body {
-      width: 60px;
-      height: 70px;
-      background: linear-gradient(to bottom, #4da3ff, #1f5cff);
-      margin: auto;
-      border-radius: 10px;
-      position: relative;
-    }
+.arm {
+  width: 18px;
+  height: 55px;
+  background: #ffd7b5;
+  border-radius: 10px;
+  position: absolute;
+  top: 8px;
+}
 
-    .arm {
-      position: absolute;
-      width: 18px;
-      height: 60px;
-      background: #ffd6b0;
-      top: 10px;
-      border-radius: 10px;
-      transform-origin: top center;
-    }
+.left-arm {
+  left: -12px;
+  transform: rotate(20deg);
+}
 
-    .left-arm {
-      left: -12px;
-      animation: swingLeft 0.6s infinite alternate;
-    }
+.right-arm {
+  right: -12px;
+  transform: rotate(-40deg);
+}
 
-    .right-arm {
-      right: -12px;
-      animation: pullArm 1s infinite alternate;
-    }
+.legs {
+  display: flex;
+  justify-content: space-between;
+  width: 45px;
+  margin: auto;
+}
 
-    .legs {
-      display: flex;
-      justify-content: space-between;
-      width: 50px;
-      margin: auto;
-    }
+.leg {
+  width: 16px;
+  height: 60px;
+  background: #111;
+  border-radius: 10px;
+}
 
-    .leg {
-      width: 16px;
-      height: 60px;
-      background: #1a1a1a;
-      border-radius: 10px;
-      transform-origin: top center;
-    }
+.rope {
+  position: absolute;
+  left: 60%;
+  bottom: 120px;
+  width: 4px;
+  height: 180px;
+  background: white;
+}
 
-    .left-leg {
-      animation: legWalk1 0.5s infinite alternate;
-    }
+.handle {
+  width: 24px;
+  height: 24px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -12px;
+  left: -10px;
+}
 
-    .right-leg {
-      animation: legWalk2 0.5s infinite alternate;
-    }
+.message {
+  position: absolute;
+  width: 100%;
+  top: 35%;
+  text-align: center;
+  opacity: 0;
+  transition: 2s;
+}
 
-    .rope {
-      position: absolute;
-      left: 60%;
-      bottom: 120px;
-      width: 4px;
-      height: 180px;
-      background: #ffffff;
-      z-index: 3;
-    }
+.message h1 {
+  color: white;
+  font-size: 80px;
+  text-shadow: 0 0 20px gold;
+}
 
-    .rope-handle {
-      position: absolute;
-      bottom: -12px;
-      left: -8px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: linear-gradient(to bottom, #ff6161, #ff0000);
-    }
+.message h2 {
+  color: #ffd700;
+  font-size: 60px;
+}
 
-    .pull {
-      animation: pullRope 1s forwards;
-    }
+.letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 900px;
+  background: rgba(0,0,0,0.75);
+  border: 3px solid gold;
+  border-radius: 20px;
+  color: white;
+  padding: 30px;
+  font-size: 24px;
+  line-height: 1.7;
+  opacity: 0;
+  transition: 2s;
+  box-shadow: 0 0 25px gold;
+}
 
-    .firework {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      opacity: 0;
-      text-shadow: 0 0 12px #ffd700, 0 0 28px #ff9900;
-    }
+.firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
 
-    .message {
-      position: absolute;
-      top: 40%;
-      width: 100%;
-      text-align: center;
-      color: #ffffff;
-      opacity: 0;
-      transform: scale(0.5);
-    }
-
-    .message h1 {
-      font-size: 80px;
-      text-shadow: 0 0 10px #ffd700, 0 0 25px #ffae00, 0 0 45px #ff7300;
-    }
-
-    .message h2 {
-      margin-top: 22px;
-      font-size: 58px;
-      color: #ffe066;
-      opacity: 0;
-    }
-
-    .show-message {
-      animation: showText 2s forwards;
-    }
-
-    .show-name {
-      animation: fadeIn 2s forwards;
-    }
-
-    .letter {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 85%;
-      max-width: 900px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 2s;
-      z-index: 20;
-    }
-
-    .letter-box {
-      background: rgba(0, 0, 0, 0.75);
-      border: 3px solid gold;
-      border-radius: 25px;
-      padding: 35px;
-      color: white;
-      font-size: 24px;
-      line-height: 1.8;
-      text-align: left;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
-      backdrop-filter: blur(6px);
-    }
-
-    .letter-box h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #ffd700;
-      text-shadow: 0 0 15px orange;
-    }
-
-    .show-letter {
-      opacity: 1;
-    }
-
-    @keyframes walkIn {
-      from {
-        left: -150px;
-      }
-      to {
-        left: 50%;
-      }
-    }
-
-    @keyframes swingLeft {
-      from {
-        transform: rotate(20deg);
-      }
-      to {
-        transform: rotate(-20deg);
-      }
-    }
-
-    @keyframes swingRight {
-      from {
-        transform: rotate(-20deg);
-      }
-      to {
-        transform: rotate(20deg);
-      }
-    }
-
-    @keyframes legWalk1 {
-      from {
-        transform: rotate(20deg);
-      }
-      to {
-        transform: rotate(-20deg);
-      }
-    }
-
-    @keyframes legWalk2 {
-      from {
-        transform: rotate(-20deg);
-      }
-      to {
-        transform: rotate(20deg);
-      }
-    }
-
-    @keyframes pullRope {
-      0% {
-        transform: translateY(0);
-      }
-
-      20% {
-        transform: translateY(50px);
-      }
-
-      40% {
-        transform: translateY(10px);
-      }
-
-      60% {
-        transform: translateY(45px);
-      }
-
-      80% {
-        transform: translateY(15px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pullArm {
-      0% {
-        transform: rotate(20deg);
-      }
-
-      100% {
-        transform: rotate(80deg);
-      }
-    }
-      50% {
-        transform: translateY(40px);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes explode {
-      0% {
-        transform: scale(0);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(15);
-        opacity: 0;
-      }
-    }
-
-    @keyframes showText {
-      from {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
+@keyframes walk {
+  from {
+    left: -120px;
+  }
+  to {
+    left: 50%;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <audio id="bgMusic" autoplay loop muted>
-    <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-126.mp3" type="audio/mpeg">
-  </audio>
+<audio id="music" autoplay loop>
+  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-126.mp3" type="audio/mpeg">
+</audio>
 
-  <audio id="pullSound">
-    <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3" type="audio/mpeg">
-  </audio>
+<audio id="pullSound">
+  <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3" type="audio/mpeg">
+</audio>
 
-  <audio id="boomSound">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3" type="audio/mpeg">
-  </audio>
+<audio id="boomSound">
+  <source src="https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="scene">
-    <div class="ground"></div>
+<div class="scene">
+  <div class="ground"></div>
 
-    <div class="boy" id="boy">
-      <div class="head"></div>
-      <div class="body">
-        <div class="arm left-arm"></div>
-        <div class="arm right-arm"></div>
-      </div>
-      <div class="legs">
-        <div class="leg left-leg"></div>
-        <div class="leg right-leg"></div>
-      </div>
+  <div class="boy" id="boy">
+    <div class="head"></div>
+    <div class="body">
+      <div class="arm left-arm"></div>
+      <div class="arm right-arm"></div>
     </div>
-
-    <div class="rope" id="rope">
-      <div class="rope-handle"></div>
-    </div>
-
-    <div class="message" id="message">
-      <h1>🎉 Happy Birthday 🎉</h1>
-      <h2 id="nameText">Bố Phúc</h2>
-    </div>
-
-    <div class="letter" id="letter">
-      <div class="letter-box">
-        <h1>💌 Gửi Bố Phúc 💌</h1>
-
-        <p>
-          Nhân dịp sinh nhật bố, con muốn gửi đến bố những lời chúc tốt đẹp nhất. Con chúc bố luôn mạnh khỏe, vui vẻ và mãi là chỗ dựa vững chắc của cả gia đình mình. Con cảm ơn bố vì đã luôn yêu thương, chăm sóc và hy sinh rất nhiều để con có được ngày hôm nay.
-        </p>
-
-        <p>
-          Con vẫn nhớ những lần bố đưa con đi chơi, những lúc cả nhà cùng cười đùa vui vẻ, hay những lần bố kiên nhẫn dạy con từng điều nhỏ nhặt trong cuộc sống. Những kỷ niệm ấy đối với con sẽ luôn rất đặc biệt và là điều mà con không bao giờ quên. Dù đôi khi con chưa ngoan hoặc làm bố buồn, bố vẫn luôn yêu thương và ở bên con.
-        </p>
-
-        <p>
-          Sinh nhật này, con chỉ mong bố luôn khỏe mạnh để gia đình mình có thật nhiều thời gian bên nhau hơn nữa. Con hứa sẽ cố gắng học tập thật tốt, ngoan ngoãn hơn và trưởng thành hơn để bố mẹ luôn tự hào về con. Mong rằng sau này con sẽ có thể làm được nhiều điều để báo đáp công ơn của bố.
-        </p>
-
-        <p>
-          Chúc mừng sinh nhật bố! Mong mọi điều may mắn, bình an và hạnh phúc sẽ luôn đến với bố. Con yêu bố rất nhiều ạ.
-        </p>
-      </div>
+    <div class="legs">
+      <div class="leg"></div>
+      <div class="leg"></div>
     </div>
   </div>
 
-  <script>
-    const boy = document.getElementById("boy");
-    const rope = document.getElementById("rope");
-    const message = document.getElementById("message");
-    const nameText = document.getElementById("nameText");
-    const letter = document.getElementById("letter");
+  <div class="rope" id="rope">
+    <div class="handle"></div>
+  </div>
 
-    const bgMusic = document.getElementById("bgMusic");
-    const pullSound = document.getElementById("pullSound");
-    const boomSound = document.getElementById("boomSound");
+  <div class="message" id="message">
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <h2>Bố Phúc</h2>
+  </div>
 
-    window.addEventListener("load", () => {
-      bgMusic.volume = 0.8;
+  <div class="letter" id="letter">
+    <h1 style="text-align:center;color:gold;">💌 Gửi Bố Phúc 💌</h1>
 
-      setTimeout(() => {
-        bgMusic.play().catch((e) => {
-          console.log("Autoplay bị chặn", e);
-        });
-      }, 1000);
-    });
-    });
-      }
-    });
+    <p>Nhân dịp sinh nhật bố, con muốn gửi đến bố những lời chúc tốt đẹp nhất. Con chúc bố luôn mạnh khỏe, vui vẻ và mãi là chỗ dựa vững chắc của cả gia đình mình.</p>
 
-    function createFirework(x, y, color) {
-      for (let p = 0; p < 12; p++) {
-        const spark = document.createElement("div");
-        spark.classList.add("firework");
+    <p>Con cảm ơn bố vì đã luôn yêu thương, chăm sóc và hy sinh rất nhiều để con có được ngày hôm nay.</p>
 
-        const angle = (Math.PI * 2 * p) / 12;
-        const distance = 120;
+    <p>Chúc mừng sinh nhật bố! Mong mọi điều may mắn, bình an và hạnh phúc sẽ luôn đến với bố. Con yêu bố rất nhiều ạ.</p>
+  </div>
+</div>
 
-        spark.style.position = "absolute";
-        spark.style.width = "10px";
-        spark.style.height = "10px";
-        spark.style.borderRadius = "50%";
-        spark.style.left = x + "px";
-        spark.style.top = y + "px";
-        spark.style.background = color;
-        spark.style.boxShadow = `0 0 20px ${color}`;
-        spark.style.zIndex = "999";
+<script>
+const boy = document.getElementById('boy');
+const rope = document.getElementById('rope');
+const message = document.getElementById('message');
+const letter = document.getElementById('letter');
 
-        document.body.appendChild(spark);
+const music = document.getElementById('music');
+const pullSound = document.getElementById('pullSound');
+const boomSound = document.getElementById('boomSound');
 
-        spark.animate([
-          {
-            transform: 'translate(0px,0px) scale(1)',
-            opacity: 1
-          },
-          {
-            transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
-            opacity: 0
-          }
-        ], {
-          duration: 1200,
-          easing: 'ease-out'
-        });
+window.onload = () => {
+  music.volume = 0.8;
 
-        setTimeout(() => {
-          spark.remove();
-        }, 1200);
-      }
-    }
-      const firework = document.createElement("div");
-      firework.classList.add("firework");
+  setTimeout(() => {
+    rope.style.transition = '0.5s';
+    rope.style.transform = 'translateY(40px)';
 
-      firework.style.left = x + "px";
-      firework.style.top = y + "px";
-      firework.style.background = color;
-      firework.style.boxShadow = `0 0 20px ${color}`;
-      firework.style.animation = "explode 1.2s ease-out forwards";
+    boy.style.left = '52%';
 
-      
-
-    function launchFireworks() {
-      const colors = [
-        "#ff4d6d",
-        "#ffd166",
-        "#06d6a0",
-        "#4cc9f0",
-        "#c77dff",
-        "#ff9f1c",
-        "#ffffff"
-      ];
-
-      let count = 0;
-
-      const interval = setInterval(() => {
-        for (let i = 0; i < 8; i++) {
-          const x = Math.random() * window.innerWidth;
-          const y = Math.random() * (window.innerHeight * 0.6);
-          const color = colors[Math.floor(Math.random() * colors.length)];
-
-          createFirework(x, y, color);
-        }
-
-        count++;
-
-        if (count > 8) {
-          clearInterval(interval);
-        }
-      }, 350);
-    }
+    pullSound.play();
 
     setTimeout(() => {
-      rope.classList.add("pull");
+      rope.style.transform = 'translateY(0px)';
 
-      pullSound.currentTime = 0;
-      pullSound.play().catch(() => {});
+      boomSound.play();
 
-      boy.style.transition = "left 0.7s";
-      boy.style.left = "51%";
+      for(let i=0;i<40;i++) {
+        createFirework();
+      }
+
+      boy.style.opacity = '0';
 
       setTimeout(() => {
-        boy.style.transition = "opacity 0.8s";
-        boy.style.opacity = "0";
-
-        launchFireworks();
-
-        boomSound.currentTime = 0;
-        boomSound.play().catch(() => {});
+        message.style.opacity = '1';
 
         setTimeout(() => {
-          message.classList.add("show-message");
+          message.style.opacity = '0';
 
           setTimeout(() => {
-            nameText.classList.add("show-name");
+            letter.style.opacity = '1';
+          }, 2000);
 
-            // Sau 5 giây thì hiện lá thư
-            setTimeout(() => {
-              message.style.transition = "opacity 2s";
-              message.style.opacity = "0";
+        }, 5000);
 
-              setTimeout(() => {
-                letter.classList.add("show-letter");
-              }, 2000);
-            }, 5000);
+      }, 1000);
 
-          }, 1500);
-        }, 1200);
-      }, 700);
-    }, 5200);
-  </script>
+    }, 700);
+
+  }, 5200);
+}
+
+function createFirework() {
+  const fw = document.createElement('div');
+  fw.classList.add('firework');
+
+  const colors = ['red','yellow','cyan','lime','orange','pink','white'];
+
+  fw.style.background = colors[Math.floor(Math.random()*colors.length)];
+  fw.style.left = Math.random()*window.innerWidth + 'px';
+  fw.style.top = Math.random()*window.innerHeight*0.6 + 'px';
+  fw.style.boxShadow = `0 0 20px ${fw.style.background}`;
+
+  document.body.appendChild(fw);
+
+  fw.animate([
+    { transform:'scale(0)', opacity:1 },
+    { transform:'scale(15)', opacity:0 }
+  ], {
+    duration: 1200,
+    easing: 'ease-out'
+  });
+
+  setTimeout(() => {
+    fw.remove();
+  }, 1200);
+}
+</script>
+
 </body>
 </html>
