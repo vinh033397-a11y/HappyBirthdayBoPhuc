@@ -173,7 +173,7 @@
         left: -150px;
       }
       to {
-        left: 44%;
+        left: 50%;
       }
     }
 
@@ -290,8 +290,8 @@
 </head>
 <body>
 
-  <audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c08a734f6c.mp3?filename=happy-birthday-song-64658.mp3" type="audio/mpeg">
   </audio>
 
   <audio id="pullSound">
@@ -329,10 +329,18 @@
 
   <script>
     const boy = document.getElementById("boy");
-    document.body.addEventListener("click", () => {
+    window.addEventListener("load", () => {
       const bg = document.getElementById("bgMusic");
-      bg.play().catch(() => {});
-    }, { once: true });
+      bg.volume = 0.7;
+
+      const playPromise = bg.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log("Autoplay bị trình duyệt chặn");
+        });
+      }
+    });
     const rope = document.getElementById("rope");
     const message = document.getElementById("message");
     const pullSound = document.getElementById("pullSound");
@@ -351,6 +359,7 @@
       document.body.appendChild(firework);
 
       setTimeout(() => {
+      bgMusic.currentTime = 8;
         firework.remove();
       }, 1200);
     }
@@ -391,7 +400,7 @@
       pullSound.play().catch(() => {});
 
       boy.style.transition = "left 0.7s";
-      boy.style.left = "48%";
+      boy.style.left = "51%";
 
       setTimeout(() => {
         boy.style.transition = "opacity 0.8s";
