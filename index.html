@@ -173,7 +173,7 @@
         left: -150px;
       }
       to {
-        left: 58%;
+        left: 44%;
       }
     }
 
@@ -290,16 +290,16 @@
 </head>
 <body>
 
-  <audio id="bgMusic" autoplay>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=happy-birthday-to-you-piano-version-13976.mp3" type="audio/mpeg">
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
 
   <audio id="pullSound">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4cda1f0a5b.mp3?filename=rope-whoosh-2-81213.mp3" type="audio/mpeg">
+    <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3" type="audio/mpeg">
   </audio>
 
   <audio id="boomSound">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_270cc00f4e.mp3?filename=firework-show-short-64657.mp3" type="audio/mpeg">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3" type="audio/mpeg">
   </audio>
 
   <div class="scene">
@@ -391,7 +391,7 @@
       pullSound.play().catch(() => {});
 
       boy.style.transition = "left 0.7s";
-      boy.style.left = "52%";
+      boy.style.left = "48%";
 
       setTimeout(() => {
         boy.style.transition = "opacity 0.8s";
