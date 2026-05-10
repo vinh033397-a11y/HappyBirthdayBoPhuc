@@ -78,7 +78,7 @@
 
     .right-arm {
       right: -12px;
-      animation: swingRight 0.6s infinite alternate;
+      animation: pullArm 1s infinite alternate;
     }
 
     .legs {
@@ -172,7 +172,7 @@
         left: -150px;
       }
       to {
-        left: 48%;
+        left: 54%;
       }
     }
 
@@ -216,6 +216,37 @@
       0% {
         transform: translateY(0);
       }
+
+      20% {
+        transform: translateY(50px);
+      }
+
+      40% {
+        transform: translateY(10px);
+      }
+
+      60% {
+        transform: translateY(45px);
+      }
+
+      80% {
+        transform: translateY(15px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pullArm {
+      0% {
+        transform: rotate(20deg);
+      }
+
+      100% {
+        transform: rotate(80deg);
+      }
+    }
       50% {
         transform: translateY(40px);
       }
@@ -257,6 +288,19 @@
   </style>
 </head>
 <body>
+
+  <audio id="bgMusic" autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=happy-birthday-to-you-piano-version-13976.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="pullSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4cda1f0a5b.mp3?filename=rope-whoosh-2-81213.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="boomSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_270cc00f4e.mp3?filename=firework-show-short-64657.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="scene">
     <div class="ground"></div>
 
@@ -286,6 +330,8 @@
     const boy = document.getElementById("boy");
     const rope = document.getElementById("rope");
     const message = document.getElementById("message");
+    const pullSound = document.getElementById("pullSound");
+    const boomSound = document.getElementById("boomSound");
     const nameText = document.getElementById("nameText");
 
     function createFirework(x, y, color) {
@@ -336,12 +382,14 @@
 
     setTimeout(() => {
       rope.classList.add("pull");
+      pullSound.play();
 
       setTimeout(() => {
         boy.style.transition = "opacity 0.8s";
         boy.style.opacity = "0";
 
         launchFireworks();
+        boomSound.play();
 
         setTimeout(() => {
           message.classList.add("show-message");
