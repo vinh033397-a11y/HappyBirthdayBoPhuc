@@ -64,12 +64,12 @@ body {
 
 .left-arm {
   left: -12px;
-  transform: rotate(20deg);
+  animation: armMove 0.5s infinite alternate;
 }
 
 .right-arm {
   right: -12px;
-  transform: rotate(-40deg);
+  animation: armMove 0.5s infinite alternate-reverse;
 }
 
 .legs {
@@ -84,6 +84,8 @@ body {
   height: 60px;
   background: #111;
   border-radius: 10px;
+  transform-origin: top center;
+  animation: legMove 0.45s infinite alternate;
 }
 
 .rope {
@@ -152,9 +154,47 @@ body {
 }
 
 @keyframes walk {
-  from {
+  0% {
     left: -120px;
   }
+
+  25% {
+    transform: translateY(-4px);
+  }
+
+  50% {
+    transform: translateY(0px);
+  }
+
+  75% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    left: 50%;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes legMove {
+  0% {
+    transform: rotate(15deg);
+  }
+
+  100% {
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes armMove {
+  0% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(-20deg);
+  }
+}
   to {
     left: 50%;
   }
@@ -165,7 +205,7 @@ body {
 <body>
 
 <audio id="music" autoplay loop muted>
-  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-126.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946498f6e8.mp3?filename=happy-birthday-126357.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="pullSound">
@@ -237,8 +277,11 @@ window.onload = () => {
   music.play().then(() => {
     setTimeout(() => {
       music.muted = false;
-    }, 300);
-  }).catch(() => {});
+      music.volume = 0.8;
+    }, 100);
+  }).catch(() => {
+    console.log('Không thể autoplay nhạc');
+  });
 
   setTimeout(() => {
     rope.style.transition = '0.5s';
