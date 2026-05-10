@@ -168,6 +168,43 @@
       animation: fadeIn 2s forwards;
     }
 
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      max-width: 900px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 2s;
+      z-index: 20;
+    }
+
+    .letter-box {
+      background: rgba(0, 0, 0, 0.75);
+      border: 3px solid gold;
+      border-radius: 25px;
+      padding: 35px;
+      color: white;
+      font-size: 24px;
+      line-height: 1.8;
+      text-align: left;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .letter-box h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ffd700;
+      text-shadow: 0 0 15px orange;
+    }
+
+    .show-letter {
+      opacity: 1;
+    }
+
     @keyframes walkIn {
       from {
         left: -150px;
@@ -325,6 +362,28 @@
       <h1>🎉 Happy Birthday 🎉</h1>
       <h2 id="nameText">Bố Phúc</h2>
     </div>
+
+    <div class="letter" id="letter">
+      <div class="letter-box">
+        <h1>💌 Gửi Bố Phúc 💌</h1>
+
+        <p>
+          Nhân dịp sinh nhật bố, con muốn gửi đến bố những lời chúc tốt đẹp nhất. Con chúc bố luôn mạnh khỏe, vui vẻ và mãi là chỗ dựa vững chắc của cả gia đình mình. Con cảm ơn bố vì đã luôn yêu thương, chăm sóc và hy sinh rất nhiều để con có được ngày hôm nay.
+        </p>
+
+        <p>
+          Con vẫn nhớ những lần bố đưa con đi chơi, những lúc cả nhà cùng cười đùa vui vẻ, hay những lần bố kiên nhẫn dạy con từng điều nhỏ nhặt trong cuộc sống. Những kỷ niệm ấy đối với con sẽ luôn rất đặc biệt và là điều mà con không bao giờ quên. Dù đôi khi con chưa ngoan hoặc làm bố buồn, bố vẫn luôn yêu thương và ở bên con.
+        </p>
+
+        <p>
+          Sinh nhật này, con chỉ mong bố luôn khỏe mạnh để gia đình mình có thật nhiều thời gian bên nhau hơn nữa. Con hứa sẽ cố gắng học tập thật tốt, ngoan ngoãn hơn và trưởng thành hơn để bố mẹ luôn tự hào về con. Mong rằng sau này con sẽ có thể làm được nhiều điều để báo đáp công ơn của bố.
+        </p>
+
+        <p>
+          Chúc mừng sinh nhật bố! Mong mọi điều may mắn, bình an và hạnh phúc sẽ luôn đến với bố. Con yêu bố rất nhiều ạ.
+        </p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -332,6 +391,7 @@
     const rope = document.getElementById("rope");
     const message = document.getElementById("message");
     const nameText = document.getElementById("nameText");
+    const letter = document.getElementById("letter");
 
     const bgMusic = document.getElementById("bgMusic");
     const pullSound = document.getElementById("pullSound");
@@ -340,15 +400,12 @@
     window.addEventListener("load", () => {
       bgMusic.volume = 0.8;
 
-      // Trick autoplay cho trình duyệt
-      bgMusic.play().then(() => {
-        setTimeout(() => {
-          bgMusic.muted = false;
-          bgMusic.volume = 0.8;
-        }, 300);
-      }).catch(() => {
-        console.log("Autoplay bị chặn");
-      });
+      setTimeout(() => {
+        bgMusic.play().catch((e) => {
+          console.log("Autoplay bị chặn", e);
+        });
+      }, 1000);
+    });
     });
       }
     });
@@ -361,10 +418,17 @@
         const angle = (Math.PI * 2 * p) / 12;
         const distance = 120;
 
+        spark.style.position = "absolute";
+        spark.style.width = "10px";
+        spark.style.height = "10px";
+        spark.style.borderRadius = "50%";
         spark.style.left = x + "px";
         spark.style.top = y + "px";
         spark.style.background = color;
         spark.style.boxShadow = `0 0 20px ${color}`;
+        spark.style.zIndex = "999";
+
+        document.body.appendChild(spark);
 
         spark.animate([
           {
@@ -380,14 +444,11 @@
           easing: 'ease-out'
         });
 
-        document.body.appendChild(spark);
-
         setTimeout(() => {
           spark.remove();
         }, 1200);
       }
-
-      return;
+    }
       const firework = document.createElement("div");
       firework.classList.add("firework");
 
@@ -397,8 +458,7 @@
       firework.style.boxShadow = `0 0 20px ${color}`;
       firework.style.animation = "explode 1.2s ease-out forwards";
 
-      document.body.appendChild(firework);
-    }
+      
 
     function launchFireworks() {
       const colors = [
@@ -453,6 +513,17 @@
 
           setTimeout(() => {
             nameText.classList.add("show-name");
+
+            // Sau 5 giây thì hiện lá thư
+            setTimeout(() => {
+              message.style.transition = "opacity 2s";
+              message.style.opacity = "0";
+
+              setTimeout(() => {
+                letter.classList.add("show-letter");
+              }, 2000);
+            }, 5000);
+
           }, 1500);
         }, 1200);
       }, 700);
