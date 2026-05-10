@@ -329,30 +329,30 @@
 
   <script>
     const boy = document.getElementById("boy");
-    window.addEventListener("load", () => {
-      const bg = document.getElementById("bgMusic");
-      bg.volume = 0.8;
-      bg.currentTime = 0;
-
-      setTimeout(() => {
-        bg.play().then(() => {
-          console.log("Nhạc đã phát");
-        }).catch((err) => {
-          console.log("Autoplay bị chặn:", err);
-        });
-      }, 500);
-    });
-      }
-    });
     const rope = document.getElementById("rope");
     const message = document.getElementById("message");
+    const nameText = document.getElementById("nameText");
+
+    const bgMusic = document.getElementById("bgMusic");
     const pullSound = document.getElementById("pullSound");
     const boomSound = document.getElementById("boomSound");
-    const nameText = document.getElementById("nameText");
+
+    window.addEventListener("load", () => {
+      bgMusic.volume = 0.8;
+
+      const playPromise = bgMusic.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log("Trình duyệt chặn autoplay");
+        });
+      }
+    });
 
     function createFirework(x, y, color) {
       const firework = document.createElement("div");
       firework.classList.add("firework");
+
       firework.style.left = x + "px";
       firework.style.top = y + "px";
       firework.style.background = color;
@@ -362,7 +362,6 @@
       document.body.appendChild(firework);
 
       setTimeout(() => {
-      bgMusic.currentTime = 8;
         firework.remove();
       }, 1200);
     }
@@ -399,6 +398,7 @@
 
     setTimeout(() => {
       rope.classList.add("pull");
+
       pullSound.currentTime = 0;
       pullSound.play().catch(() => {});
 
@@ -410,6 +410,7 @@
         boy.style.opacity = "0";
 
         launchFireworks();
+
         boomSound.currentTime = 0;
         boomSound.play().catch(() => {});
 
