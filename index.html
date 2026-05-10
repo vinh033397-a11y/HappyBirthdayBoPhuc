@@ -204,8 +204,8 @@ body {
 
 <body>
 
-<audio id="music" autoplay loop muted>
-  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946498f6e8.mp3?filename=happy-birthday-126357.mp3" type="audio/mpeg">
+<audio id="music" autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="pullSound">
@@ -274,14 +274,15 @@ const boomSound = document.getElementById('boomSound');
 window.onload = () => {
   music.volume = 0.8;
 
-  music.play().then(() => {
-    setTimeout(() => {
-      music.muted = false;
-      music.volume = 0.8;
-    }, 100);
-  }).catch(() => {
-    console.log('Không thể autoplay nhạc');
-  });
+  music.volume = 0.5;
+
+  const startMusic = () => {
+    music.play().catch(() => {});
+  };
+
+  startMusic();
+
+  document.addEventListener('click', startMusic, { once: true });
 
   setTimeout(() => {
     rope.style.transition = '0.5s';
@@ -299,6 +300,11 @@ window.onload = () => {
       for(let i=0;i<40;i++) {
         createFirework();
       }
+
+      // Pháo hoa liên tục phía sau
+      setInterval(() => {
+        createFirework();
+      }, 700);
 
       boy.style.opacity = '0';
 
