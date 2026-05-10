@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Bố Phúc</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      background: linear-gradient(to bottom, #0b1026, #12001f 45%, #000000);
+      font-family: Arial, sans-serif;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to top, #0d3b1e, #1f6b35);
+    }
+
+    .boy {
+      position: absolute;
+      bottom: 120px;
+      left: -150px;
+      width: 100px;
+      height: 180px;
+      animation: walkIn 5s linear forwards;
+      z-index: 5;
+    }
+
+    .head {
+      width: 50px;
+      height: 50px;
+      background: #ffd6b0;
+      border-radius: 50%;
+      margin: auto;
+    }
+
+    .body {
+      width: 60px;
+      height: 70px;
+      background: linear-gradient(to bottom, #4da3ff, #1f5cff);
+      margin: auto;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .arm {
+      position: absolute;
+      width: 18px;
+      height: 60px;
+      background: #ffd6b0;
+      top: 10px;
+      border-radius: 10px;
+      transform-origin: top center;
+    }
+
+    .left-arm {
+      left: -12px;
+      animation: swingLeft 0.6s infinite alternate;
+    }
+
+    .right-arm {
+      right: -12px;
+      animation: swingRight 0.6s infinite alternate;
+    }
+
+    .legs {
+      display: flex;
+      justify-content: space-between;
+      width: 50px;
+      margin: auto;
+    }
+
+    .leg {
+      width: 16px;
+      height: 60px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      transform-origin: top center;
+    }
+
+    .left-leg {
+      animation: legWalk1 0.5s infinite alternate;
+    }
+
+    .right-leg {
+      animation: legWalk2 0.5s infinite alternate;
+    }
+
+    .rope {
+      position: absolute;
+      left: 60%;
+      bottom: 120px;
+      width: 4px;
+      height: 180px;
+      background: #ffffff;
+      z-index: 3;
+    }
+
+    .rope-handle {
+      position: absolute;
+      bottom: -12px;
+      left: -8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #ff6161, #ff0000);
+    }
+
+    .pull {
+      animation: pullRope 1s forwards;
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0;
+      text-shadow: 0 0 12px #ffd700, 0 0 28px #ff9900;
+    }
+
+    .message {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    .message h1 {
+      font-size: 80px;
+      text-shadow: 0 0 10px #ffd700, 0 0 25px #ffae00, 0 0 45px #ff7300;
+    }
+
+    .message h2 {
+      margin-top: 22px;
+      font-size: 58px;
+      color: #ffe066;
+      opacity: 0;
+    }
+
+    .show-message {
+      animation: showText 2s forwards;
+    }
+
+    .show-name {
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes walkIn {
+      from {
+        left: -150px;
+      }
+      to {
+        left: 48%;
+      }
+    }
+
+    @keyframes swingLeft {
+      from {
+        transform: rotate(20deg);
+      }
+      to {
+        transform: rotate(-20deg);
+      }
+    }
+
+    @keyframes swingRight {
+      from {
+        transform: rotate(-20deg);
+      }
+      to {
+        transform: rotate(20deg);
+      }
+    }
+
+    @keyframes legWalk1 {
+      from {
+        transform: rotate(20deg);
+      }
+      to {
+        transform: rotate(-20deg);
+      }
+    }
+
+    @keyframes legWalk2 {
+      from {
+        transform: rotate(-20deg);
+      }
+      to {
+        transform: rotate(20deg);
+      }
+    }
+
+    @keyframes pullRope {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(40px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(15);
+        opacity: 0;
+      }
+    }
+
+    @keyframes showText {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="ground"></div>
+
+    <div class="boy" id="boy">
+      <div class="head"></div>
+      <div class="body">
+        <div class="arm left-arm"></div>
+        <div class="arm right-arm"></div>
+      </div>
+      <div class="legs">
+        <div class="leg left-leg"></div>
+        <div class="leg right-leg"></div>
+      </div>
+    </div>
+
+    <div class="rope" id="rope">
+      <div class="rope-handle"></div>
+    </div>
+
+    <div class="message" id="message">
+      <h1>🎉 Happy Birthday 🎉</h1>
+      <h2 id="nameText">Bố Phúc</h2>
+    </div>
+  </div>
+
+  <script>
+    const boy = document.getElementById("boy");
+    const rope = document.getElementById("rope");
+    const message = document.getElementById("message");
+    const nameText = document.getElementById("nameText");
+
+    function createFirework(x, y, color) {
+      const firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.left = x + "px";
+      firework.style.top = y + "px";
+      firework.style.background = color;
+      firework.style.boxShadow = `0 0 20px ${color}`;
+      firework.style.animation = "explode 1.2s ease-out forwards";
+
+      document.body.appendChild(firework);
+
+      setTimeout(() => {
+        firework.remove();
+      }, 1200);
+    }
+
+    function launchFireworks() {
+      const colors = [
+        "#ff4d6d",
+        "#ffd166",
+        "#06d6a0",
+        "#4cc9f0",
+        "#c77dff",
+        "#ff9f1c",
+        "#ffffff"
+      ];
+
+      let count = 0;
+
+      const interval = setInterval(() => {
+        for (let i = 0; i < 8; i++) {
+          const x = Math.random() * window.innerWidth;
+          const y = Math.random() * (window.innerHeight * 0.6);
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          createFirework(x, y, color);
+        }
+
+        count++;
+
+        if (count > 8) {
+          clearInterval(interval);
+        }
+      }, 350);
+    }
+
+    setTimeout(() => {
+      rope.classList.add("pull");
+
+      setTimeout(() => {
+        boy.style.transition = "opacity 0.8s";
+        boy.style.opacity = "0";
+
+        launchFireworks();
+
+        setTimeout(() => {
+          message.classList.add("show-message");
+
+          setTimeout(() => {
+            nameText.classList.add("show-name");
+          }, 1500);
+        }, 1200);
+      }, 700);
+    }, 5200);
+  </script>
+</body>
+</html>
