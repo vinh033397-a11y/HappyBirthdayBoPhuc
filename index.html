@@ -272,6 +272,32 @@ const boomSound = document.getElementById('boomSound');
 window.onload = () => {
   music.volume = 0.5;
 
+const startMusic = async () => {
+  try {
+    await music.play();
+  } catch (e) {
+    console.log('Autoplay bị chặn');
+  }
+};
+
+startMusic();
+
+document.addEventListener(
+  'touchstart',
+  () => {
+    music.play();
+  },
+  { once: true }
+);
+
+document.addEventListener(
+  'click',
+  () => {
+    music.play();
+  },
+  { once: true }
+);
+
   // autoplay kiểu TikTok/Youtube
   music.muted = true;
 
