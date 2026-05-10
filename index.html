@@ -41,6 +41,7 @@
       width: 100px;
       height: 180px;
       animation: walkIn 5s linear forwards;
+      animation-fill-mode: forwards;
       z-index: 5;
     }
 
@@ -172,7 +173,7 @@
         left: -150px;
       }
       to {
-        left: 54%;
+        left: 58%;
       }
     }
 
@@ -328,6 +329,10 @@
 
   <script>
     const boy = document.getElementById("boy");
+    document.body.addEventListener("click", () => {
+      const bg = document.getElementById("bgMusic");
+      bg.play().catch(() => {});
+    }, { once: true });
     const rope = document.getElementById("rope");
     const message = document.getElementById("message");
     const pullSound = document.getElementById("pullSound");
@@ -382,14 +387,19 @@
 
     setTimeout(() => {
       rope.classList.add("pull");
-      pullSound.play();
+      pullSound.currentTime = 0;
+      pullSound.play().catch(() => {});
+
+      boy.style.transition = "left 0.7s";
+      boy.style.left = "52%";
 
       setTimeout(() => {
         boy.style.transition = "opacity 0.8s";
         boy.style.opacity = "0";
 
         launchFireworks();
-        boomSound.play();
+        boomSound.currentTime = 0;
+        boomSound.play().catch(() => {});
 
         setTimeout(() => {
           message.classList.add("show-message");
