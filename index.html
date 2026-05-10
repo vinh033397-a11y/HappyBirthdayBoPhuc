@@ -291,7 +291,7 @@
 <body>
 
   <audio id="bgMusic" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c08a734f6c.mp3?filename=happy-birthday-song-64658.mp3" type="audio/mpeg">
+    <source src="https://cdn.freesound.org/previews/411/411089_5121236-lq.mp3" type="audio/mpeg">
   </audio>
 
   <audio id="pullSound">
@@ -331,14 +331,17 @@
     const boy = document.getElementById("boy");
     window.addEventListener("load", () => {
       const bg = document.getElementById("bgMusic");
-      bg.volume = 0.7;
+      bg.volume = 0.8;
+      bg.currentTime = 0;
 
-      const playPromise = bg.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          console.log("Autoplay bị trình duyệt chặn");
+      setTimeout(() => {
+        bg.play().then(() => {
+          console.log("Nhạc đã phát");
+        }).catch((err) => {
+          console.log("Autoplay bị chặn:", err);
         });
+      }, 500);
+    });
       }
     });
     const rope = document.getElementById("rope");
