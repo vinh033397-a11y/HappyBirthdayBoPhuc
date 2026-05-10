@@ -270,6 +270,16 @@ const pullSound = document.getElementById('pullSound');
 const boomSound = document.getElementById('boomSound');
 
 window.onload = () => {
+
+// Hỗ trợ iPad/iPhone bật nhạc sau cú chạm đầu tiên
+const unlockAudio = () => {
+  music.play().catch(() => {});
+  document.removeEventListener('touchstart', unlockAudio);
+  document.removeEventListener('click', unlockAudio);
+};
+
+document.addEventListener('touchstart', unlockAudio);
+document.addEventListener('click', unlockAudio);
   music.volume = 0.5;
 
 const startMusic = async () => {
